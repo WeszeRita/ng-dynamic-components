@@ -64,6 +64,12 @@ export class AppComponent {
   }
 
   openTestModal() {
-    this.dialog.open(DialogExampleComponent);
+    const ref = this.dialog.open(DialogExampleComponent, {
+      data: { message: 'I am a dynamic component inside of a dialog!' },
+    })
+
+    ref.afterClosed.subscribe(result => {
+      console.log('Dialog closed', result)
+    })
   }
 }

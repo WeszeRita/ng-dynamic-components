@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { InsertionDirective } from '../insertion.directive';
-import { DialogService } from '../dialog.service';
+import { DialogRef } from '../dialog-ref';
 
 @Component({
   selector: 'app-dialog',
@@ -27,7 +27,10 @@ export class DialogComponent implements  AfterViewInit, OnDestroy {
   @ViewChild(InsertionDirective)
   insertionPoint: InsertionDirective
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver, private cdr: ChangeDetectorRef, public dialog: DialogService) {}
+  constructor(
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private cdr: ChangeDetectorRef,
+    public dialog: DialogRef) {}
 
   ngAfterViewInit() {
     this.loadChildComponent(this.childComponentType);
@@ -41,7 +44,7 @@ export class DialogComponent implements  AfterViewInit, OnDestroy {
   }
 
   onOverlayClicked(evt: MouseEvent) {
-    this.dialog.removeDialogComponentFromBody();
+      this.dialog.close('some value');
   }
 
   onDialogClicked(event: MouseEvent) {

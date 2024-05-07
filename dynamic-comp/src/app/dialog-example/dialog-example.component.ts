@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { DialogService } from '../dialog/dialog.service';
+import { DialogConfig } from '../dialog/dialog-config';
+import { DialogRef } from '../dialog/dialog-ref';
 
 @Component({
   selector: 'app-dialog-example',
@@ -9,9 +10,9 @@ import { DialogService } from '../dialog/dialog.service';
 })
 export class DialogExampleComponent {
 
-  constructor(public dialog: DialogService) {}
+  constructor(public dialog: DialogRef, public config: DialogConfig) {}
 
   onClose() {
-    this.dialog.removeDialogComponentFromBody();
+    this.dialog.close('some value');
   }
 }
